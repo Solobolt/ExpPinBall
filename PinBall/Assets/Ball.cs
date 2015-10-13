@@ -17,12 +17,12 @@ public class Ball : MonoBehaviour {
 	void Update () {
 	if (Input.GetKeyDown ("q"))
 		{
-			rigidbody.AddForce (new Vector3(-tiltPower,0,0));
+			GetComponent<Rigidbody>().AddForce (new Vector3(-tiltPower,0,0));
 		}
 
 		if (Input.GetKeyDown ("e"))
 		{
-			rigidbody.AddForce (new Vector3(tiltPower,0,0));
+			GetComponent<Rigidbody>().AddForce (new Vector3(tiltPower,0,0));
 		}
 	}
 

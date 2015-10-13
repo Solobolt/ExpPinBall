@@ -28,7 +28,7 @@ public class BallLauncher : MonoBehaviour {
 		{
 			if (isActive)
 			{
-				ball.rigidbody.AddForce (new Vector3(0,0,2000 * (firePower/10)));
+				ball.GetComponent<Rigidbody>().AddForce (new Vector3(0,0,2000 * (firePower/10)));
 			}
 			firePower = 0;
 		}
