@@ -3,11 +3,14 @@ using System.Collections;
 
 public class Bumper : MonoBehaviour {
 
+    public GameObject explotionEffect;
+
+    private Transform myTransform;
     private int maxVelocity = 30;
 
 	// Use this for initialization
 	void Start () {
-	
+        myTransform = this.transform;
 	}
 	
 	// Update is called once per frame
@@ -50,6 +53,7 @@ public class Bumper : MonoBehaviour {
         }
 
         otherObject.rigidbody.velocity = objectVelocity;
-        print(objectVelocity);
+
+        Instantiate(explotionEffect,myTransform.position,myTransform.rotation);
     }
 }
