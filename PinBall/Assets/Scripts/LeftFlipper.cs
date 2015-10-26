@@ -10,10 +10,7 @@ public class LeftFlipper : MonoBehaviour {
 	private Vector3 targetAngle = new Vector3(0f, -20f, 0f);
 	private Vector3 startingAngle = new Vector3 (0f,20.0f,0f);
 	private Vector3 currentAngle;
-
-
-
-	
+    	
 	// Use this for initialization
 	void Start () {
 		currentAngle = transform.eulerAngles;
@@ -21,8 +18,7 @@ public class LeftFlipper : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Rotates the object
-		
+		// Rotates the object		
 		if (Input.GetKey(controlButton))
 		{
 			Flip ();

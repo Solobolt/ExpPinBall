@@ -6,11 +6,12 @@ public class Ball : MonoBehaviour {
     public GameObject ball;
     public GameObject spawnLocation;
     private int tiltPower = 5;
-    private Camera mainCamera;
+    private GameObject mainCamera;
 
     // Use this for initialization
     void Start() {
-        mainCamera = Camera.FindObjectOfType<Camera>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        spawnLocation = GameObject.FindGameObjectWithTag("Spawn");
     }
 
     // Update is called once per frame
@@ -22,8 +23,8 @@ public class Ball : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Out")
         {
-            Destroy(gameObject);
             Instantiate(ball, spawnLocation.transform.position, new Quaternion(0, 0, 0, 0));
+            Destroy(gameObject);
         }
     }
 

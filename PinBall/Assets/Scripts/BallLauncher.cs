@@ -6,6 +6,8 @@ public class BallLauncher : MonoBehaviour {
 	bool isActive = false;
 	public GameObject ball;
 	float firePower;
+    private float maxLaunchPower = 50.0f;
+
 	public int powerGrowthRate = 10;
 	// Use this for initialization
 	void Start () {
@@ -28,8 +30,8 @@ public class BallLauncher : MonoBehaviour {
 		{
 			if (isActive)
 			{
-				ball.GetComponent<Rigidbody>().AddForce (new Vector3(0,0,2000 * (firePower/10)));
-			}
+                ball.GetComponent<Rigidbody>().velocity = new Vector3(0,0, maxLaunchPower * (firePower / 10));
+            }
 			firePower = 0;
 		}
 	}
