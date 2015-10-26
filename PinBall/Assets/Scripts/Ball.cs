@@ -7,11 +7,17 @@ public class Ball : MonoBehaviour {
     public GameObject spawnLocation;
     private int tiltPower = 5;
     private GameObject mainCamera;
+    private Transform myTransform;
+    private GameManager gameManager;
+
+    public GameObject DeathExplotion;
 
     // Use this for initialization
     void Start() {
+        myTransform = this.transform;
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         spawnLocation = GameObject.FindGameObjectWithTag("Spawn");
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -23,7 +29,9 @@ public class Ball : MonoBehaviour {
     {
         if (coll.gameObject.tag == "Out")
         {
+            gameManager.removeLife();
             Instantiate(ball, spawnLocation.transform.position, new Quaternion(0, 0, 0, 0));
+            Instantiate(DeathExplotion,myTransform.position,myTransform.rotation);
             Destroy(gameObject);
         }
     }
