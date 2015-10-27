@@ -11,13 +11,10 @@ public class LeftFlipper : MonoBehaviour {
 	private Vector3 startingAngle = new Vector3 (0f,20.0f,0f);
 	private Vector3 currentAngle;
 	public bool isMoving;
-
-    private Transform myTransform;
     	
 	// Use this for initialization
 	void Start () {
 		currentAngle = transform.eulerAngles;
-        myTransform = this.transform;
 	}
 	
 	// Update is called once per frame
@@ -55,43 +52,14 @@ public class LeftFlipper : MonoBehaviour {
 		transform.eulerAngles = currentAngle;
 	}
 
-    //Checks if the paddle is moving
-    void CheckIfMoving()
-    {
-        if (atEndPos() || atStartPos())
-        {
-            isMoving = false;
-        }
-        else
-        {
-            isMoving = true;
-        }
-    }
-
-    //returns a boolean depending on if the paddles is at a starting position
-    bool atStartPos()
-    {
-        if (myTransform.rotation.y >= (0.1f))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    //Returns a bool depedning on if the paddle is at the end position
-    bool atEndPos()
-    {
-        if (myTransform.rotation.y <= (-0.1f))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+	//Checks if the paddle is moving
+	void CheckIfMoving()
+	{
+		if (currentAngle == startingAngle || currentAngle == targetAngle) {
+			isMoving = false;
+		} else {
+			isMoving = true;
+		}
+	}
 }
 

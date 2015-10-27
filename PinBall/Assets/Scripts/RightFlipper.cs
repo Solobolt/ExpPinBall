@@ -68,7 +68,8 @@ public class RightFlipper : MonoBehaviour {
 	//returns a boolean depending on if the paddles is at a starting position
 	bool atStartPos()
 	{
-		if (myTransform.rotation.y >= (0.1f)) {
+		if (myTransform.rotation.y == (0.2f)) {
+			print ("At start");
 			return true;
 		} else {
 			return false;
@@ -78,7 +79,8 @@ public class RightFlipper : MonoBehaviour {
 	//Returns a bool depedning on if the paddle is at the end position
 	bool atEndPos()
 	{
-		if (myTransform.rotation.y <= (-0.1f)) {
+		if (myTransform.rotation.y == (-0.2f)) {
+			print ("At end");
 			return true;
 		} else {
 			return false;
