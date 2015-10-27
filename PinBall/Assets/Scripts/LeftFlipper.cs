@@ -10,6 +10,7 @@ public class LeftFlipper : MonoBehaviour {
 	private Vector3 targetAngle = new Vector3(0f, -20f, 0f);
 	private Vector3 startingAngle = new Vector3 (0f,20.0f,0f);
 	private Vector3 currentAngle;
+	public bool isMoving;
     	
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,8 @@ public class LeftFlipper : MonoBehaviour {
 		{
 			FlipReturn();
 		}
+
+		CheckIfMoving ();
 	}
 
 	void Flip()
@@ -47,6 +50,16 @@ public class LeftFlipper : MonoBehaviour {
 			Mathf.LerpAngle(currentAngle.z, startingAngle.z, Time.deltaTime * flipSpeed * 2));
 		
 		transform.eulerAngles = currentAngle;
+	}
+
+	//Checks if the paddle is moving
+	void CheckIfMoving()
+	{
+		if (currentAngle == startingAngle || currentAngle == targetAngle) {
+			isMoving = false;
+		} else {
+			isMoving = true;
+		}
 	}
 }
 

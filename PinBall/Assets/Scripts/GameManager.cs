@@ -11,9 +11,13 @@ public class GameManager : MonoBehaviour {
     private int lives = 3;
     public int uiLives;
 
+	//For Set timeScale
+
+	public float setTimeScale = 1.5f;
+
     // Use this for initialization
     void Start() {
-        Time.timeScale = 1.5f;
+        Time.timeScale = setTimeScale;
     }
 
     // Update is called once per frame

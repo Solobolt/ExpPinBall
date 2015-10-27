@@ -8,18 +8,21 @@ public class RightFlipper : MonoBehaviour {
 	
 	
 	private Vector3 targetAngle = new Vector3(0f, 20.0f, 0f);
-	private Vector3 startingAngle = new Vector3 (0f, -20.0f,0f);
+	private Vector3 startingAngle = new Vector3 (0f, 340.0f,0f);
 	private Vector3 currentAngle;
+	public bool isMoving;
+
+	private Transform myTransform;
 
     // Use this for initialization
     void Start () {
 		currentAngle = transform.eulerAngles;
+		myTransform = this.transform;
 	}
 
 	// Update is called once per frame
 	void Update () {
         // Rotates the object
-
         if (Input.GetKey(controlButton))
 		{
 			Flip ();
@@ -28,6 +31,8 @@ public class RightFlipper : MonoBehaviour {
 		{
 			FlipReturn();
 		}
+
+		CheckIfMoving ();
 	}
 	
 	void Flip()
@@ -48,5 +53,37 @@ public class RightFlipper : MonoBehaviour {
 			Mathf.LerpAngle(currentAngle.z, startingAngle.z, Time.deltaTime * flipSpeed * 2));
 		
 		transform.eulerAngles = currentAngle;
+	}
+
+	//Checks if the paddle is moving
+	void CheckIfMoving()
+	{
+		if (atEndPos () || atStartPos() ){
+			isMoving = false;
+		} else {
+			isMoving = true;
+		}
+	}
+
+	//returns a boolean depending on if the paddles is at a starting position
+	bool atStartPos()
+	{
+		if (myTransform.rotation.y == (0.2f)) {
+			print ("At start");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	//Returns a bool depedning on if the paddle is at the end position
+	bool atEndPos()
+	{
+		if (myTransform.rotation.y == (-0.2f)) {
+			print ("At end");
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
