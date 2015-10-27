@@ -7,7 +7,7 @@ public class FlipperForce : MonoBehaviour {
     public string controlButton = "d";
 
 
-    private float hitPower = 5f;
+    private float hitPower = 30f;
     private float bouncePower = 1.5f;
 
 	private bool movingPaddle;
