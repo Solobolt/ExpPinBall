@@ -15,7 +15,7 @@ public class OneWayDoor : MonoBehaviour {
 
 	void OnTriggerEnter(Collider otherObject)
 	{
-		if(otherObject.gameObject.tag == "Ball")
+		if(otherObject.gameObject.GetComponent<Rigidbody>() != null)
 		{
 			Rigidbody ballRigidBody = otherObject.gameObject.GetComponent<Rigidbody>();
 			float xVelocity = ballRigidBody.velocity.x;
