@@ -9,16 +9,16 @@ public class ExplotionBlast : MonoBehaviour
 
     void Start()
     {
-        Vector3 explosionPos = transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
-        foreach (Collider hit in colliders)
+        Vector3 myPosition = transform.position;
+        Collider[] markedObject = Physics.OverlapSphere(myPosition, radius);
+        foreach (Collider otherObject in markedObject)
         {
-            if (hit.gameObject.tag != "Ball")
+            if (otherObject.gameObject.tag != "Ball")
             {
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                Rigidbody rb = otherObject.GetComponent<Rigidbody>();
 
                 if (rb != null)
-                    rb.AddExplosionForce(power, explosionPos, radius, 3.0F);
+                    rb.AddExplosionForce(power, myPosition, radius, 3.0F);
             }
         }
     }
