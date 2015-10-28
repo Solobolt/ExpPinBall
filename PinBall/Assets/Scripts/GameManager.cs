@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -11,9 +12,14 @@ public class GameManager : MonoBehaviour {
     private int lives = 3;
     public int uiLives;
 
+
 	//For Set timeScale
 
 	public float setTimeScale = 1.5f;
+
+    //Links to the UI
+    public Text uiScoreText;
+    public Text uiLivesText;
 
     // Use this for initialization
     void Start() {
@@ -23,6 +29,7 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         UIvalues();
+        UpdateUI();
     }
 
     //Adds a give value to the score
@@ -42,5 +49,12 @@ public class GameManager : MonoBehaviour {
     {
         uiScore = score;
         uiLives = lives;
+    }
+
+    //Update UI
+    void UpdateUI()
+    {
+        uiLivesText.text = "Lives: " + uiLives.ToString();
+        uiScoreText.text = "Score: " + uiScore.ToString();
     }
 }
