@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BallLauncher : MonoBehaviour {
 
+    private AudioController audioController;
+
     public GameObject explotionEffect;
 
 	bool isActive = false;
@@ -15,6 +17,7 @@ public class BallLauncher : MonoBehaviour {
 	public int powerGrowthRate = 10;
 	// Use this for initialization
 	void Start () {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
         myTransform = this.transform;
 	}
 	
@@ -32,30 +35,33 @@ public class BallLauncher : MonoBehaviour {
 
 	if (Input.GetKeyUp ("space"))
 		{
-			if (isActive)
-			{
-                ball.GetComponent<Rigidbody>().velocity = new Vector3(0,0, maxLaunchPower * (firePower / 10));
-            }
-			firePower = 0;
+            force();
             Instantiate(explotionEffect,myTransform.position,myTransform.rotation);
+            audioController.playBallLauncherSound();
 		}
 	}
 
-	void OnTriggerEnter(Collider coll)
-	{
-		if (coll.gameObject.tag == "Ball")
-		{
-			isActive = true;
-			ball = coll.gameObject;
-		}
-	}
 
-	void OnTriggerExit(Collider coll)
-	{
-		if (coll.gameObject.tag == "Ball")
-		{
-			isActive = false;
-			ball = coll.gameObject;
-		}
-	}
+    public float radius = 5.0F;
+
+
+    void force()
+    {
+        Vector3 myPosition = transform.position;
+        Collider[] markedObject = Physics.OverlapSphere(myPosition, radius);
+        foreach (Collider otherObject in markedObject)
+        {
+            Rigidbody rb = otherObject.GetComponent<Rigidbody>();
+            if (otherObject.tag == "Ball")
+            {
+                if (rb != null)
+                    rb.velocity = new Vector3(0,0, firePower*5);
+            }
+            else
+            {
+                if (rb != null)
+                    rb.AddExplosionForce(firePower, myPosition, radius, 3.0F);
+            }                
+        }
+    }
 }

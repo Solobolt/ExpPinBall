@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FlipperForce : MonoBehaviour {
 
+    private AudioController audioController;
+
     Vector3 baseRotation;
     public string controlButton = "d";
 
@@ -15,6 +17,7 @@ public class FlipperForce : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
 	}
 	
 	// Update is called once per frame
@@ -45,6 +48,8 @@ public class FlipperForce : MonoBehaviour {
 				otherObject.rigidbody.velocity = objectVelocity;
 			}
 		}
+
+        audioController.playPaddleHitSound();
     }
     void OnCollisionStay(Collision otherObject)
     {

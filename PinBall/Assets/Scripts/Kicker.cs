@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bumper : MonoBehaviour {
-
-    public GameObject explotionEffect;
+public class Kicker : MonoBehaviour {
 
     private GameManager gameManager;
     private AudioController audioController;
@@ -11,17 +9,19 @@ public class Bumper : MonoBehaviour {
     private Transform myTransform;
     private int maxVelocity = 30;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         myTransform = this.transform;
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     //Handles collitions
     void OnCollisionEnter(Collision otherObject)
@@ -32,12 +32,12 @@ public class Bumper : MonoBehaviour {
         //doubles the pinballs velocity
         //NOTE: a bouncing material on the gameobject removes any need for changing direction
         Vector3 objectVelocity = otherObject.rigidbody.velocity;
-        objectVelocity.x = objectVelocity.x * 2f;
-        objectVelocity.y = objectVelocity.y * 2f;
-        objectVelocity.z = objectVelocity.z * 2f;
-        
+        objectVelocity.x = objectVelocity.x * 5f;
+        objectVelocity.y = objectVelocity.y * 5f;
+        objectVelocity.z = objectVelocity.z * 5f;
+
         //velovity Limit positive side
-        if(objectVelocity.x > maxVelocity)
+        if (objectVelocity.x > maxVelocity)
         {
             objectVelocity.x = maxVelocity;
         }
@@ -65,9 +65,6 @@ public class Bumper : MonoBehaviour {
 
         //Sets the gameobjects velocity 
         otherObject.rigidbody.velocity = objectVelocity;
-
-        //creates an Explotion effect
-        Instantiate(explotionEffect,myTransform.position,myTransform.rotation);
 
         audioController.playBumperExplotion();
     }

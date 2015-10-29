@@ -12,9 +12,15 @@ public class GameManager : MonoBehaviour {
     private int lives = 3;
     public int uiLives;
 
+    //Hold number of pinballs in play
+    public int numPinBalls = 0;
+
+    //Holds pause menu items
+    bool isPaused = false;
+    public Canvas pauseScreen;
+
 
 	//For Set timeScale
-
 	public float setTimeScale = 1.5f;
 
     //Links to the UI
@@ -24,18 +30,20 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
         Time.timeScale = setTimeScale;
+        pauseScreen.enabled = false;
     }
 
     // Update is called once per frame
     void Update() {
         UIvalues();
         UpdateUI();
+        PauseMenuCheck();
     }
 
     //Adds a give value to the score
     public void addScore(int value)
     {
-        score += value;
+        score += value * numPinBalls;
     }
 
     //Removes a life
@@ -54,7 +62,30 @@ public class GameManager : MonoBehaviour {
     //Update UI
     void UpdateUI()
     {
-        uiLivesText.text = "Lives: " + uiLives.ToString();
+        uiLivesText.text = "Pin Balls Left: " + (3 - numPinBalls).ToString();
         uiScoreText.text = "Score: " + uiScore.ToString();
+    }
+
+    //Pause Menu Controll
+    void PauseMenuCheck()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            print("Pause");
+
+            if (isPaused == false)
+            {
+                Time.timeScale = 0;
+                isPaused = true;
+                pauseScreen.enabled = true;
+            }
+            else
+            {
+                Time.timeScale = setTimeScale;
+                isPaused = false;
+                pauseScreen.enabled = false;
+            }
+        }
+
     }
 }

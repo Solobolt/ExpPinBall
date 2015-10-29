@@ -9,6 +9,7 @@ public class Ball : MonoBehaviour {
     private GameObject mainCamera;
     private Transform myTransform;
     private GameManager gameManager;
+    private AudioController audioController;
 
     public GameObject DeathExplotion;
 
@@ -18,6 +19,9 @@ public class Ball : MonoBehaviour {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         spawnLocation = GameObject.FindGameObjectWithTag("Spawn");
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioController>();
+
+        gameManager.numPinBalls++;
     }
 
     // Update is called once per frame
@@ -30,9 +34,21 @@ public class Ball : MonoBehaviour {
         if (coll.gameObject.tag == "Out")
         {
             gameManager.removeLife();
-            Instantiate(ball, spawnLocation.transform.position, new Quaternion(0, 0, 0, 0));
+            
+            if(gameManager.numPinBalls < 3)
+            {
+                Instantiate(ball, spawnLocation.transform.position, new Quaternion(0, 0, 0, 0));
+            }
+            else
+            { if (gameManager.uiLives == 1)
+                {
+                    print("GAMEOVER");
+                }
+
+            }
             Instantiate(DeathExplotion,myTransform.position,myTransform.rotation);
             Destroy(gameObject);
+            audioController.playBigExplotion();
         }
     }
 
