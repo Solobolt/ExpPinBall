@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
     bool isPaused = false;
     public Canvas pauseScreen;
 
+    //Hold GameOver SCreen 
+    public Canvas gameOverScreen;
+
 
 	//For Set timeScale
 	public float setTimeScale = 1.5f;
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour {
     void Start() {
         Time.timeScale = setTimeScale;
         pauseScreen.enabled = false;
+        gameOverScreen.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,6 +42,16 @@ public class GameManager : MonoBehaviour {
         UIvalues();
         UpdateUI();
         PauseMenuCheck();
+        checkGameOver();
+    }
+
+    //CHecks to see if the player has lots all of thier lives
+    void checkGameOver()
+    {
+        if (numPinBalls == 3 && lives == 0)
+        {
+            gameOverScreen.enabled = true;
+        }
     }
 
     //Adds a give value to the score

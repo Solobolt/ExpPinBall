@@ -7,10 +7,9 @@ public class BallLauncher : MonoBehaviour {
 
     public GameObject explotionEffect;
 
-	bool isActive = false;
 	public GameObject ball;
 	float firePower;
-    private float maxLaunchPower = 50.0f;
+    private float maxLaunchPower = 10.0f;
 
     private Transform myTransform;
 
@@ -26,9 +25,9 @@ public class BallLauncher : MonoBehaviour {
 	if (Input.GetKey("space"))
 		{
 			firePower = firePower + (Time.deltaTime * powerGrowthRate);
-			if (firePower > 10)
+			if (firePower > maxLaunchPower)
 			{
-				firePower = 10;
+				firePower = maxLaunchPower;
 			}
 		}
 
